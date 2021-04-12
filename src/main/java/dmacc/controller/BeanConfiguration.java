@@ -3,12 +3,14 @@ package dmacc.controller;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import dmacc.beans.Auditorium;
 import dmacc.beans.Movies;
 import dmacc.beans.Passwords;
 import dmacc.beans.ProgramUsers;
 
 /**
  * Sterling Rhone - sprhone
+ * Noah Hobbs - nhobbs
  * 202102 CIS175 26740
  * Apr 12, 2021
  */
@@ -31,6 +33,12 @@ public class BeanConfiguration {
 	@Bean
 	public ProgramUsers programUsers() {
 		ProgramUsers bean = new ProgramUsers();
+		return bean;
+	}
+	
+	@Bean
+	public Auditorium  auditorium() {
+		Auditorium bean = new Auditorium();
 		return bean;
 	}
 }
