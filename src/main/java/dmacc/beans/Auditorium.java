@@ -5,7 +5,7 @@ import javax.persistence.Embeddable;
 import lombok.Data;
 
 /**
- * Noah Hobbs - nhobbs
+ * Noah Hobbs - ndhobbs
  * 202102 CIS175 26740
  * Apr 12, 2021
  */

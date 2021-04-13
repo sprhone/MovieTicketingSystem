@@ -33,6 +33,9 @@ public class BeanConfiguration {
 	@Bean
 	public ProgramUsers programUsers() {
 		ProgramUsers bean = new ProgramUsers();
+		bean.setUserType("Customer");
+		bean.setUserName("Freddy Kruger");
+		bean.setUserAccess("Base");
 		return bean;
 	}
 	
