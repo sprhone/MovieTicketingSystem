@@ -8,15 +8,18 @@ import javax.persistence.Id;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Sterling Rhone - sprhone
+ * Noah Hobbs - ndhobbs
  * 202102 CIS175 26740
  * Apr 12, 2021
  */
 
 @Data
 @Entity
+@NoArgsConstructor
 public class ProgramUsers {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,4 +29,11 @@ public class ProgramUsers {
 	private String userName;
 	@Autowired
 	private Passwords userPassword;
+	
+	public ProgramUsers(String userType, String userAccess, String userName) {
+		// TODO Auto-generated constructor stub
+		this.userType = userType;
+		this.userAccess = userAccess;
+		this.userName = userName;
+	}
 }
