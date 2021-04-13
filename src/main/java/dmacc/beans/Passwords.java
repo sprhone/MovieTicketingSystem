@@ -1,7 +1,6 @@
 package dmacc.beans;
 
 import javax.persistence.Embeddable;
-import javax.persistence.Entity;
 import lombok.Data;
 
 /**
@@ -11,7 +10,6 @@ import lombok.Data;
  */
 
 @Data
-@Entity
 @Embeddable
 public class Passwords {
 	private String password;
