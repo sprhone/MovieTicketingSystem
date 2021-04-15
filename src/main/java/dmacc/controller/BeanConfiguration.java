@@ -40,6 +40,18 @@ public class BeanConfiguration {
 	}
 	
 	@Bean
+	public ProgramUsers programUsers1() {
+		ProgramUsers bean = new ProgramUsers();
+		bean.setUserType("Admin");
+		bean.setUserName("Admin");
+		bean.setUserAccess("Admin");
+		Passwords psw = new Passwords();
+		psw.setPassword("admin");
+		bean.setUserPassword(psw);
+		return bean;
+	}
+	
+	@Bean
 	public Auditorium  auditorium() {
 		Auditorium bean = new Auditorium();
 		return bean;
