@@ -24,7 +24,7 @@
 		</tr>
 	</c:forEach>
 	</table>
-	<a href="index.html">Home</a>
+	<a href="index.jsp">Home</a>
 	<a href="addCustomer.html">Create Account</a>
 </body>
 </html>
