@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Sterling Rhone - sprhone
@@ -21,6 +22,7 @@ import lombok.Data;
 
 @Data
 @Entity
+@NoArgsConstructor
 public class Movies {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,4 +34,15 @@ public class Movies {
 	private int movieTimeMinutes;
 	@Autowired
 	private Auditorium aud;
+	
+	
+	public Movies(String movieName, String movieRating, int movieTimeMinutes, Auditorium aud) {
+		this.movieName = movieName;
+		this.movieRating = movieRating;
+		this.movieTimeMinutes = movieTimeMinutes;
+		this.aud = aud;
+	}
+	
+	
+
 }
