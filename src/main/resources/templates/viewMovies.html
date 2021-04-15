@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
 		<title>Current Movies</title>
@@ -12,14 +12,13 @@
 	</table>
 	<table>
 	<tr>
-		<td>Movie</td><td>Date</td><td>Time</td><td>Rating</td><td>Run Time</td>
+		<td class="center">Movie</td><td class="center">Date</td><td class="center">Time</td><td class="center">Rating</td><td class="center">Run Time</td>
 	</tr>
-	<c:forEach items="${movies}">		<!-- This is a JSP/JSTL function, needs changed to Thymeleaf or annother Spring MVC type iterator -->
-		<tr>
-			<td>${movies.movieName}</td><td>${movies.movieShowDate}</td><td>${movies.movieShowTime}</td><td>${movies.movieRating}</td><td>${movies.movieTimeMinutes}</td>
-			<td><a href="reserve?">Reserve seats</a></td>
-		</tr>
-	</c:forEach>
+	<tr th:each="movie: ${movies}">
+		<td id="border" th:text="${movie.movieName}"/><td id="border" th:text="${movie.movieShowDate}"/><td id="border" th:text="${movie.movieShowTime}"/>
+		<td id="border" th:text="${movie.movieRating}"/><td id="border" th:text="${movie.movieTimeMinutes} + ' min'"/>
+		<td><a href="reserve?">Reserve seats</a></td>
+	</tr>
 	</table>
 	<a href="index.html">Home</a>
 	<a href="addCustomer.html">Create Account</a>
