@@ -17,13 +17,18 @@ Password: <input name="userPass" size="10" th:field="*{userPass}"><br />
 <script>
 //Noah Hobbs -ndhobbs
 function formValidate(form) {
-	let passCheck = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
+	var passCheck = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
+	var userCheck = /^[a-z0-9_-]{3,15}$/;
 	if (form.userName.value == "") {
 		   
 		   window.alert("Warning! The username field is empty!");
 		   form.userName.focus();
 		   return false;
 		   
+		  } else if (!userCheck.test(form.userName.value)){
+			  window.alert("Warning! The invalid username!");
+			   form.userName.focus();
+			   return false;
 		  }
 	if (form.userPass.value == "") {
 		   
@@ -31,6 +36,10 @@ function formValidate(form) {
 		   form.userPass.focus();
 		   return false;
 		   
+		  } else if(!passCheck.test(form.userPass.value)) {
+			  window.alert("Warning! The Password contains invalid characters!");
+			  form.userPass.focus();
+			  return false;
 		  }
 }
 </script>
