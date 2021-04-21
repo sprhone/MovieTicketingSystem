@@ -15,6 +15,8 @@ import lombok.NoArgsConstructor;
  * Noah Hobbs - ndhobbs
  * 202102 CIS175 26740
  * Apr 12, 2021
+ * This class is going to be used to keep track of logins and accounts
+ * Has the autowired field of userPassword
  */
 
 @Data
