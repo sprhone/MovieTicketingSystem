@@ -16,21 +16,23 @@ Password: <input name="userPass" size="10" th:field="*{userPass}"><br />
 
 <script>
 //Noah Hobbs -ndhobbs
-if (form.userName.value == "") {
-	   
-	   window.alert("Warning! The username field is empty!");
-	   form.userName.focus();
-	   return false;
-	   
-	  }
-if (form.userPass.value == "") {
-	   
-	   window.alert("Warning! The Password field is empty!");
-	   form.userPass.focus();
-	   return false;
-	   
-	  }
-	  
+function formValidate(form) {
+	let passCheck = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
+	if (form.userName.value == "") {
+		   
+		   window.alert("Warning! The username field is empty!");
+		   form.userName.focus();
+		   return false;
+		   
+		  }
+	if (form.userPass.value == "") {
+		   
+		   window.alert("Warning! The Password field is empty!");
+		   form.userPass.focus();
+		   return false;
+		   
+		  }
+}
 </script>
 </body>
 </html>
