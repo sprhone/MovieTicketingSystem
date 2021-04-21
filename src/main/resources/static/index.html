@@ -10,6 +10,7 @@
 		<p><a href="viewMovies?">View Current Movies</a></p>
 		<p><a href="addCustomer.html">Create an account</a></p>
 		<br><br><p><a href="">Employee sign in</a></p>
+		<div th:switch="${user}">
 		<form action="signIn">
 			<label for="name">Name:</label>
 			<input type="text" id="name" placeholder="name"><br>
@@ -17,5 +18,6 @@
 			<input type="password" id="password" placeholder="password" >
 			<input type="submit" value="Sign In">
 		</form>
+		</div>
 	</body>
 </html>

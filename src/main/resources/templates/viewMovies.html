@@ -17,7 +17,7 @@
 	<tr th:each="movie: ${movies}">
 		<td id="border" th:text="${movie.movieName}"/><td id="border" th:text="${movie.movieShowDate}"/><td id="border" th:text="${movie.movieShowTime}"/>
 		<td id="border" th:text="${movie.movieRating}"/><td id="border" th:text="${movie.movieTimeMinutes} + ' min'"/>
-		<td><a href="reserve?">Reserve seats</a></td>
+		<td><a href="reserve?">Reserve seats</a></td><div th:switch="${user.userAccess}"></div>
 	</tr>
 	</table>
 	<a href="index.html">Home</a>

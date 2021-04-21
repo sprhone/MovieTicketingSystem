@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import dmacc.beans.Movies;
+import dmacc.beans.ProgramUsers;
 import dmacc.repository.MoviesRepository;
 import dmacc.repository.ProgramUsersRepository;
 
@@ -27,14 +28,14 @@ public class WebController {
 	ProgramUsersRepository pRepo;
 	
 	@GetMapping("/viewMovies")
-	public String viewMovies(@RequestParam(name="filter", required=false) String filter, Model model) {
+	public String viewMovies(@RequestParam(name="filter", required=false) String filter, Model model, ProgramUsers user) {
 		if(filter == null) {
 			List<Movies> movies = mRepo.findAll();
 			model.addAttribute("movies", movies);
+			model.addAttribute("user", user);
 			return"viewMovies";
 		}
 		// RequestParam will handle if user wants to filter the movies by a certain attribute
-		
 		return"viewMovies";
 	}
 	
