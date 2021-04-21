@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
  * Noah Hobbs - ndhobbs
  * 202102 CIS175 26740
  * Apr 12, 2021
+ * This class is embedded into the movies class
+ * It uses lombok and the spring framework
  */
 
 @Data

@@ -18,6 +18,7 @@ import lombok.NoArgsConstructor;
  * Noah Hobbs - nhobbs
  * 202102 CIS175 26740
  * Apr 12, 2021
+ * This class uses lombok and the spring framework
  */
 
 @Data
