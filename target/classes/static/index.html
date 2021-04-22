@@ -10,7 +10,6 @@
 		<p><a href="viewMovies?">View Current Movies</a></p>
 		<p><a href="addCustomer.html">Create an account</a></p>
 		<br><br><p><a href="">Employee sign in</a></p>
-		<div th:switch="${user}">
 		<form action="signIn">
 			<label for="name">Name:</label>
 			<input type="text" id="name" placeholder="name"><br>
@@ -18,6 +17,33 @@
 			<input type="password" id="password" placeholder="password" >
 			<input type="submit" value="Sign In">
 		</form>
-		</div>
+		<script>
+			function formValidate(form) {
+				var passCheck = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
+				var userCheck = /^[a-z0-9_-]{3,15}$/;
+				if (form.name.value == "") {
+					   
+					   window.alert("Warning! The username field is empty!");
+					   form.name.focus();
+					   return false;
+					   
+					  } else if (!userCheck.test(form.name.value)){
+						  window.alert("Warning! The username contains invalid characters!");
+						   form.name.focus();
+						   return false;
+					  }
+				if (form.password.value == "") {
+					   
+					   window.alert("Warning! The Password field is empty!");
+					   form.userPass.focus();
+					   return false;
+					   
+					  } else if(!passCheck.test(form.password.value)) {
+						  window.alert("Warning! The Password contains invalid characters!");
+						  form.password.focus();
+						  return false;
+					  }
+			}
+		</script>
 	</body>
 </html>
