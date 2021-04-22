@@ -1,6 +1,7 @@
 package dmacc.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,6 +40,12 @@ public class WebController {
 		return"viewMovies";
 	}
 	
-	
+	@GetMapping("/editMovie")
+	public String editMovie(@RequestParam(name="movie", required=true) long movieId, Model model, ProgramUsers user) {
+		Optional<Movies> movie = mRepo.findById(movieId);
+		model.addAttribute("movie", movie);
+		model.addAttribute("user", user);
+		return"editMovie";
+	}
 	
 }
