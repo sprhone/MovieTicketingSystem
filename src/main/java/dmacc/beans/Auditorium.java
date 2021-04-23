@@ -23,11 +23,11 @@ public class Auditorium {
 	private int numOfSeats;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int roomNum;
+	private long roomNum;
 	private String roomName;
 	
 	
-	public Auditorium(int numOfSeats, int roomNum, String roomName) {
+	public Auditorium(int numOfSeats, long roomNum, String roomName) {
 		this.numOfSeats = numOfSeats;
 		this.roomNum = roomNum;
 		this.roomName = roomName;

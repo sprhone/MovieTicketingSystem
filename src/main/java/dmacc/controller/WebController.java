@@ -68,7 +68,7 @@ public class WebController {
 		LocalTime time = LocalTime.parse(model.getAttribute("time").toString());
 		String rating = model.getAttribute("rating").toString();
 		int minutes =  Integer.parseInt(model.getAttribute("minutes").toString());
-		int auditoriumNum = Integer.parseInt(model.getAttribute("auditorium").toString());
+		long auditoriumNum = Integer.parseInt(model.getAttribute("auditorium").toString());
 		Auditorium auditorium = aRepo.getOne(auditoriumNum);
 		
 		if(!(movie.getMovieId() > 0)) {// create movie
