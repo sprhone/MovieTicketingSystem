@@ -23,5 +23,6 @@
 	</table>
 	<a href="index.html">Home</a>
 	<a href="addCustomer.html">Create Account</a>
+	<span th:switch="${user.userAccess}"><span th:case="Admin"><a href="editMovie?">Add Movie</a></span><span th:case="Employee"><a href="editMovie?">Add Movie</a></span></span>
 </body>
 </html>

@@ -1,5 +1,7 @@
 package dmacc.controller;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,8 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import dmacc.beans.Auditorium;
 import dmacc.beans.Movies;
 import dmacc.beans.ProgramUsers;
+import dmacc.repository.AuditoriumRepository;
 import dmacc.repository.MoviesRepository;
 import dmacc.repository.ProgramUsersRepository;
 
@@ -28,6 +32,9 @@ public class WebController {
 	@Autowired
 	ProgramUsersRepository pRepo;
 	
+	@Autowired
+	AuditoriumRepository aRepo;
+	
 	@GetMapping("/viewMovies")
 	public String viewMovies(@RequestParam(name="filter", required=false) String filter, Model model, ProgramUsers user) {
 		if(filter == null) {
@@ -41,11 +48,44 @@ public class WebController {
 	}
 	
 	@GetMapping("/editMovie")
-	public String editMovie(@RequestParam(name="movie", required=true) long movieId, Model model, ProgramUsers user) {
-		Optional<Movies> movie = mRepo.findById(movieId);
-		model.addAttribute("movie", movie);
+	public String editMovie(@RequestParam(name="movie", required=false) long movieId, Model model, ProgramUsers user) {
+		if(movieId > 0) {
+			Optional<Movies> movie = mRepo.findById(movieId);
+			model.addAttribute("movie", movie);
+		}
+		else {
+			Movies newMovie = new Movies();
+			model.addAttribute("movie", newMovie);
+		}
 		model.addAttribute("user", user);
 		return"editMovie";
+	}
+	
+	@GetMapping("/saveEdit")
+	public String saveEdit(Movies movie, Model model, ProgramUsers user) {
+		String name = model.getAttribute("name").toString();
+		LocalDate date = LocalDate.parse(model.getAttribute("date").toString());
+		LocalTime time = LocalTime.parse(model.getAttribute("time").toString());
+		String rating = model.getAttribute("rating").toString();
+		int minutes =  Integer.parseInt(model.getAttribute("minutes").toString());
+		int auditoriumNum = Integer.parseInt(model.getAttribute("auditorium").toString());
+		Auditorium auditorium = aRepo.getOne(auditoriumNum);
+		
+		if(!(movie.getMovieId() > 0)) {// create movie
+			Movies newMovie = new Movies(name, date, time, rating, minutes, auditorium);
+			mRepo.save(newMovie);
+		}
+		else { // edit existing movie
+			movie.setMovieName(name);
+			movie.setMovieRating(rating);
+			movie.setMovieShowDate(date);
+			movie.setMovieShowTime(time);
+			movie.setMovieTimeMinutes(minutes);
+			movie.setAud(auditorium);
+			mRepo.save(movie);
+		}
+		model.addAttribute("user", user);
+		return "viewMovies?";
 	}
 	
 }
