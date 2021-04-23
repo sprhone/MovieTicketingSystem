@@ -43,6 +43,18 @@ public class Movies {
 		this.movieTimeMinutes = movieTimeMinutes;
 		this.aud = aud;
 	}
+
+
+	public Movies(String movieName, LocalDate movieShowDate, LocalTime movieShowTime, String movieRating,
+			int movieTimeMinutes, Auditorium aud) {
+		super();
+		this.movieName = movieName;
+		this.movieShowDate = movieShowDate;
+		this.movieShowTime = movieShowTime;
+		this.movieRating = movieRating;
+		this.movieTimeMinutes = movieTimeMinutes;
+		this.aud = aud;
+	}
 	
 	
 
