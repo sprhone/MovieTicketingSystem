@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Add/Edit Movie</title>
+<link href="style.css" rel="stylesheet">
+<script>
+	function validateForm(){
+		var dateformat = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
+		if(document.getElementById("name").value != ""){ // name is not empty
+			if(document.getElementById("date").value.match(dateformat)){ // validate date
+					  document.form1.date.focus();
+					  //Test which seperator is used '/' or '-'
+					  var opera1 = document.getElementById("date").value.split('/');
+					  var opera2 = document.getElementById("date").value.split('-');
+					  lopera1 = opera1.length;
+					  lopera2 = opera2.length;
+					  // Extract the string into month, date and year
+					  if (lopera1>1)
+					  {
+					  	var pdate = document.getElementById("date").value.split('/');
+					  }
+					  else if (lopera2>1)
+					  {
+					  	var pdate = document.getElementById("date").value.split('-');
+					  }
+					  var dd = parseInt(pdate[0]);
+					  var mm  = parseInt(pdate[1]);
+					  var yy = parseInt(pdate[2]);
+					  // Create list of days of a month [assume there is no leap year by default]
+					  var ListofDays = [31,28,31,30,31,30,31,31,30,31,30,31];
+					  if (mm==1 || mm>2)
+					  {
+					  	if (dd>ListofDays[mm-1])
+					  	{
+					  		alert('Invalid date format!');
+					  		return false;
+					  	}
+					  }
+					  if (mm==2)
+					  {
+					  	var lyear = false;
+					  		if ( (!(yy % 4) && yy % 100) || !(yy % 400)) 
+					  		{
+					  			lyear = true;
+					  		}
+					  		if ((lyear==false) && (dd>=29))
+					  		{
+					  			alert('Invalid date format!');
+					  			return false;
+					  		}
+					  		if ((lyear==true) && (dd>29))
+					  		{
+					  			alert('Invalid date format!');
+					  			return false;
+					  		}
+					  }
+					  	// Check time
+					  	var timeStr = document.getElementById("time").value;
+					  	if((timeStr.search(/^\d{2}:\d{2}:\d{2}$/) != -1) &&
+					            (timeStr.substr(0,2) >= 0 && timeStr.substr(0,2) <= 24) &&
+					            (timeStr.substr(3,2) >= 0 && timeStr.substr(3,2) <= 59) &&
+					            (timeStr.substr(6,2) >= 0 && timeStr.substr(6,2) <= 59)){
+					  		// Check minutes
+					  		if(!NaN(document.getElementById("minutes").value) && document.getElementById("minutes").value > 0){
+					  			// Check a selected auditorium
+					  			if(document.getElementById("auditorium").value > 0){
+					  				return true;
+					  			}
+					  			else{
+					  				alert("Please select an auditorium!");
+					  				return false;
+					  			}
+					  		}
+					  		else{
+					  			alert("Minutes must be a positive number!")
+					  		}
+					  	}
+					  	else{
+					  		alert("Invalid time format!");
+					  		return false;
+					  	}
+				  }
+				  else
+				  {
+				  alert("Invalid date format!");
+				  document.form1.text1.focus();
+				  return false;
+				  }
+		}
+		else{
+			alert("Invalid Movie Name");
+			return false;
+		}
+	}
+</script>
+</head>
+<body>
+	<form name="form1" action="saveEdit?" onsubmit="return validateForm()">
+		<label for="name">Name:</label>
+		<input type="text" id="name" name="name" th:text="${movie.movieName}" autofocus/><br>
+		<label for="date">Date:</label>
+		<input type="text" id="date" name="date" th:text="${movie.movieShowDate}"/><br>
+		<label for="time">Time:</label>
+		<input type="text" id="time" name="time" th:text="${movie.movieShowTime}"/><br>
+		<label for="rating">Rating:</label>
+		<input type="text" id="rating" name="rating" th:text="${movie.movieRating}"/><br>
+		<label for="minutes">Minutes:</label>
+		<input type="text" id="minutes" name="minutes" th:text="${movie.movieTimeMinutes}"/><br>
+		<label for="auditorium">Auditorium:</label>
+		<select name="auditorium" id="auditorium">
+			<option th:foreach="aud : ${auditoriums}" value="${aud.roomNum}">${aud.roomNum}</option>
+		</select><br>
+		<input type="submit" value="Submit">
+	</form>
+</body>
+</html>
