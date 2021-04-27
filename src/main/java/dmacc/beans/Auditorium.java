@@ -1,10 +1,9 @@
 package dmacc.beans;
 
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,19 +16,19 @@ import lombok.NoArgsConstructor;
  */
 
 @Data
-@Embeddable
+@Entity
 @NoArgsConstructor
 public class Auditorium {
 	private int numOfSeats;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long roomNum;
+	private long audId;
 	private String roomName;
 	
 	
-	public Auditorium(int numOfSeats, long roomNum, String roomName) {
+	public Auditorium(int numOfSeats, long audId, String roomName) {
 		this.numOfSeats = numOfSeats;
-		this.roomNum = roomNum;
+		this.audId = audId;
 		this.roomName = roomName;
 	}
 }
