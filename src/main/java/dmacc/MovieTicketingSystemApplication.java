@@ -59,7 +59,7 @@ public class MovieTicketingSystemApplication implements CommandLineRunner {
 		
 		Auditorium aud = new Auditorium(15, 22, "Big Room");
 	  
-		Movies v = new Movies("Monty Python and the Holy Grail", "PG", 91, aud);
+		Movies v = new Movies("Monty Python and the Holy Grail", "PG", 91/*, aud*/);
 		mRepo.save(v);
 		List<Movies> allMyMovies = mRepo.findAll();
 		for(Movies mov: allMyMovies) {
