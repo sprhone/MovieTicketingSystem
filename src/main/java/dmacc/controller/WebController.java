@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import dmacc.beans.Auditorium;
@@ -72,7 +74,7 @@ public class WebController {
 		Auditorium auditorium = aRepo.getOne(auditoriumNum);
 		
 		if(!(movie.getMovieId() > 0)) {// create movie
-			Movies newMovie = new Movies(name, date, time, rating, minutes, auditorium);
+			Movies newMovie = new Movies(name, date, time, rating, minutes/*, auditorium*/);
 			mRepo.save(newMovie);
 		}
 		else { // edit existing movie
@@ -81,11 +83,17 @@ public class WebController {
 			movie.setMovieShowDate(date);
 			movie.setMovieShowTime(time);
 			movie.setMovieTimeMinutes(minutes);
-			movie.setAud(auditorium);
+			//movie.setAud(auditorium);
 			mRepo.save(movie);
 		}
 		model.addAttribute("user", user);
 		return "viewMovies?";
 	}
-	
+			
+		@GetMapping("/addCustomer")
+		public String addNewCustomer (Model model) {
+			ProgramUsers pu = new ProgramUsers();
+			model.addAttribute("newProgramUser", pu);
+			return "addCustomer";
+		}	
 }
