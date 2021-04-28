@@ -7,9 +7,9 @@
 </head>
 <body>
 <h1> Create Account</h1>
-<form th:object="${newProgramUser}" onsubmit="return formValidate(this);" method='POST'>
+<form name="form" th:object="${newProgramUser}" onsubmit="return formValidate(this);" method='POST'>
 User Name: <input name="userName" size="20" th:field="*{userName}"> <br />
-Password: <input name="passwords.userPass" size="10" th:field="*{passwords.userPass}"><br />
+Password: <input name="userPassword" size="10" th:field="*{passwords.userPassword}" id="userPassword"><br />
 
 <input name="submit" type="submit" value="submit"/>
 </form>
@@ -18,6 +18,7 @@ Password: <input name="passwords.userPass" size="10" th:field="*{passwords.userP
 //Noah Hobbs -ndhobbs
 //This javascript checks that the user is entering valid input
 //Note to teammates I'm not 100% sure if I need to say form.passwords.userPass or if it should be form.userPass
+	//RE: note above: I added a form name, and id name to use the passwords.userPassword value - Sterling Rhone -sprhone
 function formValidate(form) {
 	//these variables hold the regex that we will use to check that the user is entering valid information
 	var passCheck = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
@@ -34,15 +35,15 @@ function formValidate(form) {
 			   form.userName.focus();
 			   return false;
 		  }
-	if (form.passwords.userPass.value == "") {
+	if (form.userPassword.value == "") {
 		   
 		   window.alert("Warning! The Password field is empty!");
-		   form.userPass.focus();
+		   form.userPassword.focus();
 		   return false;
 		   
-		  } else if(!passCheck.test(form.passwords.userPass.value)) {
+		  } else if(!passCheck.test(form.userPassword.value)) {
 			  window.alert("Warning! The Password contains invalid characters!");
-			  form.userPass.focus();
+			  form.userPassword.focus();
 			  return false;
 		  }
 }
