@@ -6,6 +6,7 @@
 <link href="style.css" rel="stylesheet">
 </head>
 <body>
+<h1> Create Account</h1>
 <form th:object="${newProgramUser}" onsubmit="return formValidate(this);" method='POST'>
 User Name: <input name="userName" size="20" th:field="*{userName}"> <br />
 Password: <input name="passwords.userPass" size="10" th:field="*{passwords.userPass}"><br />
@@ -18,8 +19,10 @@ Password: <input name="passwords.userPass" size="10" th:field="*{passwords.userP
 //This javascript checks that the user is entering valid input
 //Note to teammates I'm not 100% sure if I need to say form.passwords.userPass or if it should be form.userPass
 function formValidate(form) {
+	//these variables hold the regex that we will use to check that the user is entering valid information
 	var passCheck = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
 	var userCheck = /^[a-z0-9_-]{3,15}$/;
+	// the if statements below are just ensuring that the user won't enter blank or invalid info
 	if (form.userName.value == "") {
 		   
 		   window.alert("Warning! The username field is empty!");
