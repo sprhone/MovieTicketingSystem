@@ -95,5 +95,11 @@ public class WebController {
 			ProgramUsers pu = new ProgramUsers();
 			model.addAttribute("newProgramUser", pu);
 			return "addCustomer";
-		}	
+		}
+		
+		@PostMapping("/addCustomer")
+		public String addNewCustomer(@ModelAttribute ProgramUsers pu, Model model) {
+			pRepo.save(pu);
+			return addNewCustomer(model);
+		}
 }
