@@ -19,16 +19,15 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 public class Auditorium {
-	private int numOfSeats;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long audId;
+	private long id;
+	private int numOfSeats = 0;
 	private String roomName;
 	
 	
-	public Auditorium(int numOfSeats, long audId, String roomName) {
+	public Auditorium(int numOfSeats, String roomName) {
 		this.numOfSeats = numOfSeats;
-		this.audId = audId;
 		this.roomName = roomName;
 	}
 }

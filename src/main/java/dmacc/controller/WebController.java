@@ -3,7 +3,6 @@ package dmacc.controller;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import dmacc.beans.Auditorium;
+import dmacc.beans.EditForm;
 import dmacc.beans.Movies;
 import dmacc.beans.ProgramUsers;
 import dmacc.repository.AuditoriumRepository;
@@ -50,9 +50,12 @@ public class WebController {
 	}
 	
 	@GetMapping("/editMovie")
-	public String editMovie(@RequestParam(name="movie", required=false) long movieId, Model model, ProgramUsers user) {
-		if(movieId > 0) {
-			Optional<Movies> movie = mRepo.findById(movieId);
+	public String editMovie(@RequestParam(name="movie", required=false) String movieId, Model model, ProgramUsers user) {
+		List<Auditorium> auditoriums = aRepo.findAll();
+		model.addAttribute("auditoriums", auditoriums);
+		long movieID = Long.parseLong(movieId);
+		if(movieID > 0) {
+			Movies movie = mRepo.getOne(movieID);
 			model.addAttribute("movie", movie);
 		}
 		else {
@@ -63,31 +66,33 @@ public class WebController {
 		return"editMovie";
 	}
 	
-	@GetMapping("/saveEdit")
-	public String saveEdit(Movies movie, Model model, ProgramUsers user) {
-		String name = model.getAttribute("name").toString();
-		LocalDate date = LocalDate.parse(model.getAttribute("date").toString());
-		LocalTime time = LocalTime.parse(model.getAttribute("time").toString());
-		String rating = model.getAttribute("rating").toString();
-		int minutes =  Integer.parseInt(model.getAttribute("minutes").toString());
-		long auditoriumNum = Integer.parseInt(model.getAttribute("auditorium").toString());
+	@PostMapping("/saveEdit")
+	public String saveEdit(Model model, ProgramUsers user, @ModelAttribute EditForm form1) {
+		long id = Long.parseLong(form1.getId());
+		String name = form1.getName();
+		LocalDate date = LocalDate.parse(form1.getDate());
+		LocalTime time = LocalTime.parse(form1.getTime());
+		String rating = form1.getRating();
+		int minutes =  Integer.parseInt(form1.getMinutes());
+		long auditoriumNum = Long.parseLong(form1.getAuditorium());
 		Auditorium auditorium = aRepo.getOne(auditoriumNum);
 		
-		if(!(movie.getMovieId() > 0)) {// create movie
-			Movies newMovie = new Movies(name, date, time, rating, minutes/*, auditorium*/);
+		if(!(id > 0)) {// create movie
+			Movies newMovie = new Movies(name, date, time, rating, minutes, auditorium);
 			mRepo.save(newMovie);
 		}
 		else { // edit existing movie
-			movie.setMovieName(name);
-			movie.setMovieRating(rating);
-			movie.setMovieShowDate(date);
-			movie.setMovieShowTime(time);
-			movie.setMovieTimeMinutes(minutes);
-			//movie.setAud(auditorium);
-			mRepo.save(movie);
+			Movies movieE = mRepo.getOne(id);
+			movieE.setMovieName(name);
+			movieE.setMovieRating(rating);
+			movieE.setMovieShowDate(date);
+			movieE.setMovieShowTime(time);
+			movieE.setMovieTimeMinutes(minutes);
+			movieE.setAud(auditorium);
+			mRepo.save(movieE);
 		}
 		model.addAttribute("user", user);
-		return "viewMovies?";
+		return "redirect:/viewMovies?";
 	}
 			
 		@GetMapping("/addCustomer")
@@ -95,5 +100,18 @@ public class WebController {
 			ProgramUsers pu = new ProgramUsers();
 			model.addAttribute("newProgramUser", pu);
 			return "addCustomer";
-		}	
+		}
+		
+		@PostMapping("/addCustomer")
+		public String addNewCustomer(@ModelAttribute ProgramUsers pu, Model model) {
+			pRepo.save(pu);
+			return addNewCustomer(model);
+		}
+		
+		@PostMapping("/delete")
+		public String deleteMovie(@ModelAttribute EditForm form2, ProgramUsers user) {
+			mRepo.deleteById(Long.parseLong(form2.getId()));
+			return "redirect:/viewMovies?";
+		}
+			
 }
