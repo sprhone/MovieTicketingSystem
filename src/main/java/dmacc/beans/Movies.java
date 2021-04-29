@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,7 +31,9 @@ public class Movies {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long movieId;
 	private String movieName;
+	@Column(columnDefinition = "date")
 	private LocalDate movieShowDate;
+	@Column(columnDefinition = "time")
 	private LocalTime movieShowTime;
 	private String movieRating;
 	private int movieTimeMinutes;

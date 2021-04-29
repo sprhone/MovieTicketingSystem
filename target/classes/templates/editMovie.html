@@ -7,19 +7,18 @@
 <script>
 	function validateForm(){
 		// variable contains regex to ensure that the date entered is in the correct format
-		var dateformat = /^\d{4}[\-](0?[1-9]|[12][0-9]|3[01])[\-](0?[1-9]|1[012])$/;
+		var dateformat = /^\d{4}[\-](0?[1-9]|1[012])[\-](0?[1-9]|[12][0-9]|3[01])$/;
 		if(document.getElementById("name").value != ""){ // name is not empty
 			if(document.getElementById("date").value.match(dateformat)){ // validate date
-					  document.form1.date.focus();
 					  var pdate = document.getElementById("date").value.split('-');
 					  var dd = parseInt(pdate[2]);
 					  var mm  = parseInt(pdate[1]);
 					  var yy = parseInt(pdate[0]);
 					  // Create list of days of a month [assume there is no leap year by default]
-					  var ListofDays = [31,28,31,30,31,30,31,31,30,31,30,31];
+					  var listOfDays = [31,28,31,30,31,30,31,31,30,31,30,31];
 					  if (mm==1 || mm>2)
 					  {
-					  	if (dd>ListofDays[mm-1])
+					  	if (dd > listOfDays[mm-1])
 					  	{
 					  		alert('Invalid date format!');
 					  		return false;
@@ -65,17 +64,20 @@
 					  	}
 					  	else{
 					  		alert("Invalid time format!");
+					  		form1.time.focus()
 					  		return false;
 					  	}
 				  }
 				  else
 				  {
 				  alert("Invalid date format!");
+				  document.form1.date.focus();
 				  return false;
 				  }
 		}
 		else{
 			alert("Invalid Movie Name");
+			form1.name.focus()
 			return false;
 		}
 	}
@@ -95,7 +97,7 @@
 		<label for="name">Name:</label>
 		<input type="text" id="name" name="name" th:value="${movie.movieName}" autofocus/><br>
 		<label for="date">Date:</label>
-		<input type="text" id="date" name="date" th:value="${movie.movieShowDate}"/>"yyyy-m-d"<br>
+		<input type="text" id="date" name="date" th:value="${movie.movieShowDate}"/>"yyyy-mm-dd"<br>
 		<label for="time">Time:</label>
 		<input type="text" id="time" name="time" th:value="${movie.movieShowTime}"/>"hr:min"<br>
 		<label for="rating">Rating:</label>
