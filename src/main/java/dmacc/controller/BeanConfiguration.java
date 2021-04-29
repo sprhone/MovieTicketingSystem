@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import dmacc.beans.Auditorium;
+import dmacc.beans.EditForm;
 import dmacc.beans.Movies;
 import dmacc.beans.Passwords;
 import dmacc.beans.ProgramUsers;
@@ -54,6 +55,12 @@ public class BeanConfiguration {
 	@Bean
 	public Auditorium  auditorium() {
 		Auditorium bean = new Auditorium();
+		return bean;
+	}
+	
+	@Bean
+	public EditForm editForm() {
+		EditForm bean = new EditForm();
 		return bean;
 	}
 }

@@ -36,10 +36,10 @@ public class MovieTicketingSystemApplication implements CommandLineRunner {
 		ApplicationContext appContext = new AnnotationConfigApplicationContext(BeanConfiguration.class);
 		ProgramUsers pu = appContext.getBean("programUsers", ProgramUsers.class);
 		pu.setUserName("JimmyBobs");
-		pRepo.save(pu);
+		//pRepo.save(pu);
 		
 		ProgramUsers d = new ProgramUsers("Customer", "Base", "Jimmy Bobs");
-		pRepo.save(d);
+		//pRepo.save(d);
 		List<ProgramUsers> allMyUsers = pRepo.findAll();
 		for(ProgramUsers people: allMyUsers) {
 			System.out.println(people.toString());
@@ -50,24 +50,7 @@ public class MovieTicketingSystemApplication implements CommandLineRunner {
 		
 		
 		
-		
-		ApplicationContext appContext1 = new AnnotationConfigApplicationContext(BeanConfiguration.class);
-		Movies m = appContext1.getBean("movies", Movies.class);
-		m.setMovieName("The Princess bride");
-		mRepo.save(m);
-		 
-		
-		Auditorium aud = new Auditorium(15, 22, "Big Room");
-	  
-		Movies v = new Movies("Monty Python and the Holy Grail", "PG", 91/*, aud*/);
-		mRepo.save(v);
-		List<Movies> allMyMovies = mRepo.findAll();
-		for(Movies mov: allMyMovies) {
-			System.out.println(mov.toString());
-		}
-	
-		
-		 ((AbstractApplicationContext) appContext1).close(); 
+
 	}
 }
 

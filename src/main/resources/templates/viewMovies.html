@@ -18,11 +18,11 @@
 		<td id="border" th:text="${movie.movieName}"/><td id="border" th:text="${movie.movieShowDate}"/><td id="border" th:text="${movie.movieShowTime}"/>
 		<td id="border" th:text="${movie.movieRating}"/><td id="border" th:text="${movie.movieTimeMinutes} + ' min'"/>
 		<td><a href="reserve?">Reserve seats</a></td>
-		<td th:switch="${user.userAccess}"><span th:case="Admin"><a href="editMovie?movie=${movie.movieId}">Edit</a></span><span th:case="Employee"><a href="edit">Edit</a></span></td>
+		<!--<td th:switch="${user.userAccess}"><span th:case="Admin">--><td><a th:href="@{|editMovie?movie=${movie.movieId}|}">Edit</a></td><!--</span><span th:case="Employee"><a href="edit">Edit</a></span></td>-->
 	</tr>
 	</table>
 	<a href="index.html">Home</a>
 	<a href="addCustomer">Create Account</a>
-	<span th:switch="${user.userAccess}"><span th:case="Admin"><a href="editMovie?">Add Movie</a></span><span th:case="Employee"><a href="editMovie?">Add Movie</a></span></span>
+	<!--  <span th:switch="${user.userAccess}"><span th:case="Admin">--><a href="editMovie?movie=-1">Add Movie</a></span><!-- <span th:case="Employee"><a href="editMovie?">Add Movie</a></span></span>-->
 </body>
 </html>

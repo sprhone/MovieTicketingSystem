@@ -7,27 +7,14 @@
 <script>
 	function validateForm(){
 		// variable contains regex to ensure that the date entered is in the correct format
-		var dateformat = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
+		var dateformat = /^\d{4}[\-](0?[1-9]|[12][0-9]|3[01])[\-](0?[1-9]|1[012])$/;
 		if(document.getElementById("name").value != ""){ // name is not empty
 			if(document.getElementById("date").value.match(dateformat)){ // validate date
 					  document.form1.date.focus();
-					  //Test which seperator is used '/' or '-'
-					  var opera1 = document.getElementById("date").value.split('/');
-					  var opera2 = document.getElementById("date").value.split('-');
-					  lopera1 = opera1.length;
-					  lopera2 = opera2.length;
-					  // Extract the string into month, date and year
-					  if (lopera1>1)
-					  {
-					  	var pdate = document.getElementById("date").value.split('/');
-					  }
-					  else if (lopera2>1)
-					  {
-					  	var pdate = document.getElementById("date").value.split('-');
-					  }
-					  var dd = parseInt(pdate[0]);
+					  var pdate = document.getElementById("date").value.split('-');
+					  var dd = parseInt(pdate[2]);
 					  var mm  = parseInt(pdate[1]);
-					  var yy = parseInt(pdate[2]);
+					  var yy = parseInt(pdate[0]);
 					  // Create list of days of a month [assume there is no leap year by default]
 					  var ListofDays = [31,28,31,30,31,30,31,31,30,31,30,31];
 					  if (mm==1 || mm>2)
@@ -58,10 +45,9 @@
 					  }
 					  	// Check time
 					  	var timeStr = document.getElementById("time").value;
-					  	if((timeStr.search(/^\d{2}:\d{2}:\d{2}$/) != -1) &&
+					  	if((timeStr.search(/^\d{2}:\d{2}$/) != -1) &&
 					            (timeStr.substr(0,2) >= 0 && timeStr.substr(0,2) <= 24) &&
-					            (timeStr.substr(3,2) >= 0 && timeStr.substr(3,2) <= 59) &&
-					            (timeStr.substr(6,2) >= 0 && timeStr.substr(6,2) <= 59)){
+					            (timeStr.substr(3,2) >= 0 && timeStr.substr(3,2) <= 59)){
 					  		// Check minutes
 					  		if(!NaN(document.getElementById("minutes").value) && document.getElementById("minutes").value > 0){
 					  			// Check a selected auditorium
@@ -85,7 +71,6 @@
 				  else
 				  {
 				  alert("Invalid date format!");
-				  document.form1.text1.focus();
 				  return false;
 				  }
 		}
@@ -94,25 +79,40 @@
 			return false;
 		}
 	}
+	
+	function confirmDelete() {
+		  if (confirm("You are about to delete this movie. Is this ok?")) {
+		    return true;
+		  } else {
+		    return false;
+		  }
+		}
 </script>
 </head>
 <body>
-	<form name="form1" action="saveEdit?" onsubmit="return validateForm()">
+	<form name="form1" action="saveEdit" th:object="${form1}" onsubmit="return validateForm()" method="post">
+		<input type="hidden" id="id" name="id" th:value="${movie.movieId}"/>
 		<label for="name">Name:</label>
-		<input type="text" id="name" name="name" th:text="${movie.movieName}" autofocus/><br>
+		<input type="text" id="name" name="name" th:value="${movie.movieName}" autofocus/><br>
 		<label for="date">Date:</label>
-		<input type="text" id="date" name="date" th:text="${movie.movieShowDate}"/><br>
+		<input type="text" id="date" name="date" th:value="${movie.movieShowDate}"/>"yyyy-m-d"<br>
 		<label for="time">Time:</label>
-		<input type="text" id="time" name="time" th:text="${movie.movieShowTime}"/><br>
+		<input type="text" id="time" name="time" th:value="${movie.movieShowTime}"/>"hr:min"<br>
 		<label for="rating">Rating:</label>
-		<input type="text" id="rating" name="rating" th:text="${movie.movieRating}"/><br>
+		<input type="text" id="rating" name="rating" th:value="${movie.movieRating}"/><br>
 		<label for="minutes">Minutes:</label>
-		<input type="text" id="minutes" name="minutes" th:text="${movie.movieTimeMinutes}"/><br>
+		<input type="text" id="minutes" name="minutes" th:value="${movie.movieTimeMinutes}"/><br>
 		<label for="auditorium">Auditorium:</label>
 		<select name="auditorium" id="auditorium">
-			<option th:foreach="aud : ${auditoriums}" value="${aud.roomNum}">${aud.roomNum}</option>
+			<option th:each="aud : ${auditoriums}" th:value="${aud.id}" th:text="${aud.id}"></option>
 		</select><br>
 		<input type="submit" value="Submit">
+	</form>
+	<form name="form2" action="delete?" th:object="${form2}" onsubmit="return confirmDelete()" method="post">
+	<span th:if="${movie.movieId}">
+		<input type="hidden" id="id" name="id" th:value="${movie.movieId}"/>
+		<input type="submit" value="Delete This Movie">
+	</span>
 	</form>
 </body>
 </html>

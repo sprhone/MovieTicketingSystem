@@ -3,10 +3,14 @@ package dmacc.beans;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -30,27 +34,27 @@ public class Movies {
 	private LocalTime movieShowTime;
 	private String movieRating;
 	private int movieTimeMinutes;
-
-	//private Auditorium aud;
+	@ManyToOne
+	private Auditorium aud;
 	
 	
-	public Movies(String movieName, String movieRating, int movieTimeMinutes/*, Auditorium aud*/) {
+	public Movies(String movieName, String movieRating, int movieTimeMinutes, Auditorium aud) {
 		this.movieName = movieName;
 		this.movieRating = movieRating;
 		this.movieTimeMinutes = movieTimeMinutes;
-		//this.aud = aud;
+		this.aud = aud;
 	}
 
 
 	public Movies(String movieName, LocalDate movieShowDate, LocalTime movieShowTime, String movieRating,
-			int movieTimeMinutes/*, Auditorium aud*/) {
+			int movieTimeMinutes, Auditorium aud) {
 		super();
 		this.movieName = movieName;
 		this.movieShowDate = movieShowDate;
 		this.movieShowTime = movieShowTime;
 		this.movieRating = movieRating;
 		this.movieTimeMinutes = movieTimeMinutes;
-		//this.aud = aud;
+		this.aud = aud;
 	}
 	
 	
