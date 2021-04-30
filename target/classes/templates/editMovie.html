@@ -10,6 +10,7 @@
 		var dateformat = /^\d{4}[\-](0?[1-9]|1[012])[\-](0?[1-9]|[12][0-9]|3[01])$/;
 		if(document.getElementById("name").value != ""){ // name is not empty
 			if(document.getElementById("date").value.match(dateformat)){ // validate date
+					  //the variables below contain the day, month and year for conversion and to ensure the date is entered correctly
 					  var pdate = document.getElementById("date").value.split('-');
 					  var dd = parseInt(pdate[2]);
 					  var mm  = parseInt(pdate[1]);

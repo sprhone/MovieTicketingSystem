@@ -16,6 +16,7 @@ public class EditForm {
 	private String auditorium;
 	public EditForm(String id, String name, String date, String time, String rating, String minutes, String auditorium) {
 		super();
+		//constructor with 7 args
 		this.id = id;
 		this.name = name;
 		this.date = date;
