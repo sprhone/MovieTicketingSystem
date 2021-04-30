@@ -34,6 +34,7 @@ public class BeanConfiguration {
 	@Bean
 	public ProgramUsers programUsers() {
 		ProgramUsers bean = new ProgramUsers();
+		//Customer Bean
 		bean.setUserType("Customer");
 		bean.setUserName("Freddy Kruger");
 		bean.setUserAccess("Base");
@@ -43,6 +44,7 @@ public class BeanConfiguration {
 	@Bean
 	public ProgramUsers programUsers1() {
 		ProgramUsers bean = new ProgramUsers();
+		//Admin/manager bean
 		bean.setUserType("Admin");
 		bean.setUserName("Admin");
 		bean.setUserAccess("Admin");
