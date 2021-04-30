@@ -42,6 +42,7 @@ public class Movies {
 	
 	
 	public Movies(String movieName, String movieRating, int movieTimeMinutes, Auditorium aud) {
+		//constructor with 4 args
 		this.movieName = movieName;
 		this.movieRating = movieRating;
 		this.movieTimeMinutes = movieTimeMinutes;
@@ -52,6 +53,7 @@ public class Movies {
 	public Movies(String movieName, LocalDate movieShowDate, LocalTime movieShowTime, String movieRating,
 			int movieTimeMinutes, Auditorium aud) {
 		super();
+		//constructor with 6 args
 		this.movieName = movieName;
 		this.movieShowDate = movieShowDate;
 		this.movieShowTime = movieShowTime;
