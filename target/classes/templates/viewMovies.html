@@ -12,11 +12,11 @@
 	</table>
 	<table>
 	<tr>
-		<td class="center">Movie</td><td class="center">Date</td><td class="center">Time</td><td class="center">Rating</td><td class="center">Run Time</td>
+		<td class="center">Movie</td><td class="center">Date</td><td class="center">Time</td><td class="center">Rating</td><td class="center">Run Time</td><td class="center">Auditorium Name</td>
 	</tr>
 	<tr th:each="movie: ${movies}">
 		<td id="border" th:text="${movie.movieName}"/><td id="border" th:text="${movie.movieShowDate}"/><td id="border" th:text="${movie.movieShowTime}"/>
-		<td id="border" th:text="${movie.movieRating}"/><td id="border" th:text="${movie.movieTimeMinutes} + ' min'"/>
+		<td id="border" th:text="${movie.movieRating}"/><td id="border" th:text="${movie.movieTimeMinutes} + ' min'"/><td id="border" th:text="${movie.aud.roomName}"/>
 		<td><a href="reserve?">Reserve seats</a></td>
 		<!--<td th:switch="${user.userAccess}"><span th:case="Admin">--><td><a th:href="@{|editMovie?movie=${movie.movieId}|}">Edit</a></td><!--</span><span th:case="Employee"><a href="edit">Edit</a></span></td>-->
 	</tr>
