@@ -61,7 +61,4 @@ public class Movies {
 		this.movieTimeMinutes = movieTimeMinutes;
 		this.aud = aud;
 	}
-	
-	
-
 }

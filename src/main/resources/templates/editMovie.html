@@ -107,7 +107,7 @@
 		<input type="text" id="minutes" name="minutes" th:value="${movie.movieTimeMinutes}"/><br>
 		<label for="auditorium">Auditorium:</label>
 		<select name="auditorium" id="auditorium">
-			<option th:each="aud : ${auditoriums}" th:value="${aud.id}" th:text="${aud.id}"></option>
+			<option th:each="aud : ${auditoriums}" th:value="${aud.id}" th:text="${aud.roomName}"></option>
 		</select><br>
 		<input type="submit" value="Submit">
 	</form>
